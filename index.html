@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Juli's Escape Adventure ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%}
+body{font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(135deg,#ffd6e7,#d9e9ff);display:flex;justify-content:center;align-items:center;overflow:hidden}
+.game-wrapper{width:min(1000px,96vw);height:min(750px,96vh);background:#fff;border-radius:25px;overflow:hidden;box-shadow:0 15px 50px rgba(0,0,0,.2);display:flex;flex-direction:column}
+.header{height:70px;flex-shrink:0;padding:0 25px;background:linear-gradient(90deg,#ff7eb3,#ff758c);color:#fff;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:bold}.stats{display:flex;gap:10px}.stat{padding:9px 14px;border-radius:15px;background:rgba(255,255,255,.22);font-weight:bold}
+.game-area{position:relative;flex:1;overflow:hidden;background:linear-gradient(#dff4ff 0%,#f7fbff 70%)}.room{position:absolute;inset:0;overflow:hidden}
+.wall-decoration{position:absolute;top:0;left:0;width:100%;height:15px;background:#ff9fc0}
+.window{position:absolute;top:55px;left:9%;width:145px;height:105px;border:11px solid white;background:linear-gradient(#72cfff,#d9f5ff);box-shadow:0 5px 15px rgba(0,0,0,.15)}
+.window:before{content:"";position:absolute;width:5px;height:100%;background:#fff;left:50%}.window:after{content:"";position:absolute;width:100%;height:5px;background:#fff;top:50%}
+.floor{position:absolute;bottom:0;left:0;width:100%;height:90px;background:repeating-linear-gradient(90deg,#d59b70 0,#d59b70 55px,#c68b62 57px,#c68b62 110px);border-top:8px solid #a96d48;z-index:1}
+.platform{position:absolute;height:18px;background:linear-gradient(#e2a06b,#a96d48);border-radius:8px 8px 4px 4px;border:3px solid #875536;z-index:4;box-shadow:0 5px 5px rgba(0,0,0,.15)}
+.door{position:absolute;right:5%;bottom:90px;width:85px;height:145px;background:#875536;border:8px solid #673e29;border-radius:8px 8px 0 0;z-index:5}.door.locked:after{content:"🔒";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}.door.open{background:#292929}.door.open:after{content:"🚪";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:30px}
+.table{position:absolute;left:35%;bottom:90px;width:170px;height:60px;background:#9c663e;border-radius:8px;z-index:3}.table:before,.table:after{content:"";position:absolute;width:17px;height:75px;background:#75472b;bottom:-60px}.table:before{left:18px}.table:after{right:18px}
+.chair{position:absolute;left:23%;bottom:90px;width:60px;height:75px;background:#e7a54c;border-radius:8px;z-index:3}
+.juli{position:absolute;width:48px;height:65px;z-index:20;will-change:left,bottom}.juli-body{position:absolute;left:8px;bottom:0;width:32px;height:38px;background:#ff78a5;border-radius:18px 18px 10px 10px}.juli-head{position:absolute;left:8px;top:0;width:32px;height:32px;background:#ffd2b3;border-radius:50%;z-index:2}.juli-head:before{content:"";position:absolute;top:-4px;left:-3px;width:38px;height:20px;background:#5a3425;border-radius:50% 50% 30% 30%}.eye{position:absolute;top:14px;width:4px;height:5px;background:#222;border-radius:50%;z-index:4}.eye.left{left:9px}.eye.right{right:9px}
+.sahid{position:absolute;top:18px;left:18px;width:290px;display:flex;gap:10px;align-items:flex-start;z-index:50}.sahid-avatar{width:55px;height:55px;flex-shrink:0;border-radius:50%;background:#7f9cff;border:4px solid white;display:flex;justify-content:center;align-items:center;font-size:27px;box-shadow:0 3px 10px rgba(0,0,0,.2)}.speech{background:#fff;padding:11px 14px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.15);font-size:14px;line-height:1.4}.speech strong{color:#ff5f8f}
+.heart{position:absolute;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:29px;z-index:12;pointer-events:none;animation:heartFloat 1s infinite alternate ease-in-out}@keyframes heartFloat{from{transform:translateY(0)}to{transform:translateY(-7px)}}
+.key{position:absolute;width:40px;height:40px;display:flex;justify-content:center;align-items:center;font-size:34px;z-index:12;pointer-events:none;animation:keyFloat 1s infinite alternate}@keyframes keyFloat{from{transform:rotate(-10deg) translateY(0)}to{transform:rotate(10deg) translateY(-6px)}}
+.level-complete{position:absolute;inset:0;background:rgba(255,255,255,.95);display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:25px;z-index:100}.level-complete.show{display:flex}.level-complete h1{color:#ff5f8f;font-size:40px;margin:10px 0 15px}.level-complete p{max-width:600px;font-size:18px;line-height:1.6}
+.next-btn{margin-top:25px;padding:14px 30px;border:none;border-radius:30px;background:#ff6f9f;color:#fff;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 5px 15px rgba(255,111,159,.4);touch-action:manipulation}.next-btn:active{transform:scale(.95)}
+.final-screen{position:absolute;inset:0;background:linear-gradient(135deg,#fff0f6,#eaf4ff);display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px;z-index:200;overflow:auto}.final-screen.show{display:flex}.final-heart{font-size:72px;animation:heartBeat 1s infinite}@keyframes heartBeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}.final-screen h1{color:#ff5c91;font-size:43px;margin:10px 0 20px}.final-screen p{max-width:720px;color:#444;font-size:18px;line-height:1.7}
+.controls{height:105px;flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:15px;background:#fff;border-top:1px solid #eee}.control-btn{width:58px;height:58px;border:none;border-radius:18px;background:#ff8db5;color:#fff;font-size:25px;font-weight:bold;box-shadow:0 5px 10px rgba(0,0,0,.15);touch-action:none}.control-btn:active{transform:scale(.9)}.jump-btn{background:#8d9eff}
+@media(max-width:600px){body{align-items:stretch}.game-wrapper{width:100%;height:100vh;border-radius:0}.header{height:65px;padding:0 10px}.logo{font-size:16px}.stats{gap:5px;font-size:11px}.stat{padding:7px 8px}.window{width:95px;height:70px;left:5%;top:60px}.sahid{left:8px;top:8px;width:225px}.sahid-avatar{width:45px;height:45px;font-size:22px}.speech{font-size:11px;padding:8px}.door{width:65px;height:120px}.table{width:125px;left:38%}.controls{height:95px}.control-btn{width:52px;height:52px}.final-screen{padding:18px}.final-screen h1{font-size:31px}.final-screen p{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="game-wrapper">
+<div class="header"><div class="logo">🌸 Juli's Escape Adventure</div><div class="stats"><div class="stat">Level: <span id="levelText">1</span>/5</div><div class="stat">❤️ <span id="heartCount">0</span></div></div></div>
+<div class="game-area" id="gameArea">
+<div class="room">
+<div class="wall-decoration"></div><div class="window"></div><div class="floor"></div>
+<div class="door locked" id="door"></div><div class="table"></div><div class="chair"></div>
+<div class="sahid"><div class="sahid-avatar">🧑</div><div class="speech"><strong>Sahid:</strong> <span id="hint"></span></div></div>
+<div class="juli" id="juli"><div class="juli-head"><span class="eye left"></span><span class="eye right"></span></div><div class="juli-body"></div></div>
+<div class="level-complete" id="levelComplete"><div style="font-size:60px">🎉</div><h1>Level Complete!</h1><p id="praiseText"></p><button class="next-btn" id="nextBtn">Next Level ❤️</button></div>
+<div class="final-screen" id="finalScreen"><div class="final-heart">❤️</div><h1>You Did It, Juli!</h1><p>Juli, you were absolutely amazing! 🌸 You started this adventure trapped inside a room, but you never gave up.<br><br>You solved every challenge, collected every heart, found every key and made your way through all five levels.<br><br>Every challenge became easier because you kept trying, stayed patient and believed in yourself.<br><br>Sahid is really proud of you. ❤️<br><br>You proved that patience, courage and determination can help you overcome anything.<br><br>Keep being the clever, strong and wonderful person you are, Juli.<br><br>You didn't just escape the room — <strong>you conquered the whole adventure!</strong> 🌷✨</p><button class="next-btn" id="playAgainBtn">Play Again 🔄</button></div>
+</div></div>
+<div class="controls"><button class="control-btn" id="leftBtn">◀</button><button class="control-btn jump-btn" id="jumpBtn">▲</button><button class="control-btn" id="rightBtn">▶</button></div>
+</div>
+
+<script>
+const gameArea=document.getElementById("gameArea"),juli=document.getElementById("juli"),door=document.getElementById("door"),hint=document.getElementById("hint"),levelText=document.getElementById("levelText"),heartCountText=document.getElementById("heartCount"),levelComplete=document.getElementById("levelComplete"),praiseText=document.getElementById("praiseText"),nextBtn=document.getElementById("nextBtn"),finalScreen=document.getElementById("finalScreen"),playAgainBtn=document.getElementById("playAgainBtn");
+let level=1,hearts=0,keyCollected=false,gameRunning=true,levelFinished=false,juliX=60,juliY=0,velocityY=0,jumpAvailable=true,jumpPressed=false,movingLeft=false,movingRight=false,levelHearts=[],currentPlatforms=[];
+const levels=[
+{hearts:3,platforms:[],hint:"Juli, start simple! ❤️ Collect all the hearts, find the key and reach the door!",praise:"Juli! 🌸 You did it! Your first escape is complete. You collected all the hearts and found your way out. I knew you could do it! ❤️"},
+{hearts:4,platforms:[{left:230,bottom:170,width:150},{left:470,bottom:230,width:150}],hint:"Level 2! 🌷 The hearts are a little higher now. Use your jump and collect all four!",praise:"Wow, Juli! 🎉 You completed Level 2! You handled the jumps perfectly and didn't give up. You're doing amazing! ❤️"},
+{hearts:5,platforms:[{left:170,bottom:150,width:130},{left:390,bottom:220,width:140},{left:620,bottom:160,width:130}],hint:"You're getting better! 🌼 Use the platforms to reach the hearts. I'm cheering for you, Juli!",praise:"Amazing, Juli! 🌼 Level 3 is complete! You are becoming a real escape expert. I love how patiently you solved that one! ✨"},
+{hearts:6,platforms:[{left:130,bottom:150,width:130},{left:320,bottom:240,width:130},{left:510,bottom:160,width:130},{left:700,bottom:250,width:110}],hint:"Level 4! 🌺 This one needs patience. Jump carefully and collect every heart!",praise:"Juli, that was fantastic! ❤️ You conquered Level 4! Even when things became harder, you kept trying. I'm really proud of you! 🌸"},
+{hearts:7,platforms:[{left:100,bottom:150,width:120},{left:270,bottom:230,width:120},{left:440,bottom:150,width:120},{left:610,bottom:240,width:120},{left:760,bottom:150,width:100}],hint:"This is the final room, Juli! ❤️ Collect every heart, find the key and escape! I believe in you!",praise:"YOU DID IT, JULI! 🎉❤️ Five levels completed! You were incredible. I knew you could make it all the way!"}
+];
+function getHeartLocations(n){
+if(n===1)return[{left:170,bottom:125},{left:390,bottom:125},{left:610,bottom:125}];
+if(n===2)return[{left:150,bottom:125},{left:270,bottom:215},{left:510,bottom:275},{left:690,bottom:125}];
+if(n===3)return[{left:130,bottom:125},{left:205,bottom:195},{left:425,bottom:245},{left:655,bottom:205},{left:760,bottom:125}];
+if(n===4)return[{left:90,bottom:125},{left:165,bottom:195},{left:350,bottom:265},{left:535,bottom:205},{left:735,bottom:275},{left:820,bottom:125}];
+return[{left:70,bottom:125},{left:125,bottom:195},{left:310,bottom:255},{left:475,bottom:195},{left:650,bottom:265},{left:790,bottom:195},{left:850,bottom:125}];
+}
+function startLevel(){
+gameRunning=true;levelFinished=false;hearts=0;keyCollected=false;juliX=60;juliY=0;velocityY=0;jumpAvailable=true;jumpPressed=false;levelText.textContent=level;heartCountText.textContent=hearts;levelComplete.classList.remove("show");finalScreen.classList.remove("show");door.classList.remove("open");door.classList.add("locked");hint.textContent=levels[level-1].hint;document.querySelectorAll(".heart,.key,.platform").forEach(e=>e.remove());levelHearts=[];currentPlatforms=[];createLevelObjects();updateJuli();
+}
+function createLevelObjects(){
+levels[level-1].platforms.forEach(p=>{const el=document.createElement("div");el.className="platform";el.style.left=p.left+"px";el.style.bottom=p.bottom+"px";el.style.width=p.width+"px";gameArea.appendChild(el);currentPlatforms.push({element:el,left:p.left,bottom:p.bottom,width:p.width});});
+getHeartLocations(level).forEach(p=>{const el=document.createElement("div");el.className="heart";el.textContent="❤️";el.style.left=p.left+"px";el.style.bottom=p.bottom+"px";gameArea.appendChild(el);levelHearts.push(el);});
+const key=document.createElement("div");key.className="key";key.id="levelKey";key.textContent="🔑";key.style.left="620px";key.style.bottom="210px";key.style.display="none";gameArea.appendChild(key);
+}
+function updateJuli(){juli.style.left=juliX+"px";juli.style.bottom=(90+juliY)+"px";}
+function jump(){if(!gameRunning||jumpPressed||!jumpAvailable)return;jumpPressed=true;jumpAvailable=false;velocityY=14;}
+function handlePlatformCollision(previousY){
+if(velocityY>=0)return;
+const playerLeft=juliX,playerRight=juliX+48,previousFeet=90+previousY,currentFeet=90+juliY;
+for(const p of currentPlatforms){
+const horizontal=playerRight>p.left&&playerLeft<p.left+p.width;if(!horizontal)continue;
+const platformTop=p.bottom+18;
+if(previousFeet>=platformTop&&currentFeet<=platformTop){juliY=platformTop-90;velocityY=0;jumpAvailable=true;updateJuli();return;}
+}
+}
+function checkHeartCollision(){
+const r=juli.getBoundingClientRect();
+for(let i=0;i<levelHearts.length;i++){const h=levelHearts[i];if(!h||!h.isConnected)continue;const hr=h.getBoundingClientRect();if(!(r.right<hr.left||r.left>hr.right||r.bottom<hr.top||r.top>hr.bottom)){h.remove();levelHearts[i]=null;hearts++;heartCountText.textContent=hearts;if(hearts>=levels[level-1].hearts)showKey();}}
+}
+function showKey(){const key=document.getElementById("levelKey");if(!key)return;key.style.display="flex";hint.textContent="Amazing! 🌸 You collected every heart! Now find the key and escape! 🔑";}
+function checkKeyCollision(){
+if(keyCollected)return;const key=document.getElementById("levelKey");if(!key||key.style.display==="none")return;const r=juli.getBoundingClientRect(),kr=key.getBoundingClientRect();if(!(r.right<kr.left||r.left>kr.right||r.bottom<kr.top||r.top>kr.bottom)){keyCollected=true;key.remove();door.classList.remove("locked");door.classList.add("open");hint.textContent="You found the key! 🔑 Now reach the door, Juli! ❤️";}
+}
+function checkDoorCollision(){
+if(!keyCollected||levelFinished)return;const r=juli.getBoundingClientRect(),dr=door.getBoundingClientRect();if(!(r.right<dr.left||r.left>dr.right||r.bottom<dr.top||r.top>dr.bottom))completeLevel();
+}
+function completeLevel(){if(levelFinished)return;levelFinished=true;gameRunning=false;praiseText.textContent=levels[level-1].praise;levelComplete.classList.add("show");nextBtn.textContent=level===5?"Finish Adventure ❤️":"Next Level ❤️";}
+nextBtn.addEventListener("click",()=>{if(level===5){levelComplete.classList.remove("show");finalScreen.classList.add("show");gameRunning=false;return;}level++;startLevel();});
+playAgainBtn.addEventListener("click",()=>{level=1;finalScreen.classList.remove("show");startLevel();});
+document.addEventListener("keydown",e=>{
+if(e.repeat){if(e.key==="ArrowLeft"||e.key.toLowerCase()==="a")movingLeft=true;if(e.key==="ArrowRight"||e.key.toLowerCase()==="d")movingRight=true;return;}
+const k=e.key.toLowerCase();if(k==="arrowleft"||k==="a")movingLeft=true;if(k==="arrowright"||k==="d")movingRight=true;if(k==="arrowup"||k==="w"||k===" "){e.preventDefault();jump();}
+});
+document.addEventListener("keyup",e=>{const k=e.key.toLowerCase();if(k==="arrowleft"||k==="a")movingLeft=false;if(k==="arrowright"||k==="d")movingRight=false;if(k==="arrowup"||k==="w"||k===" ")jumpPressed=false;});
+function setupHoldButton(button,direction){
+button.addEventListener("pointerdown",e=>{e.preventDefault();button.setPointerCapture(e.pointerId);if(direction==="left")movingLeft=true;if(direction==="right")movingRight=true;});
+button.addEventListener("pointerup",e=>{e.preventDefault();if(direction==="left")movingLeft=false;if(direction==="right")movingRight=false;});
+button.addEventListener("pointercancel",()=>{movingLeft=false;movingRight=false;});
+button.addEventListener("pointerleave",()=>{movingLeft=false;movingRight=false;});
+}
+setupHoldButton(document.getElementById("leftBtn"),"left");setupHoldButton(document.getElementById("rightBtn"),"right");
+const jumpBtn=document.getElementById("jumpBtn");
+jumpBtn.addEventListener("pointerdown",e=>{e.preventDefault();jump();});
+jumpBtn.addEventListener("pointerup",e=>{e.preventDefault();jumpPressed=false;});
+jumpBtn.addEventListener("pointercancel",()=>{jumpPressed=false;});
+function gameLoop(){
+if(gameRunning){
+const previousY=juliY;
+if(movingLeft)juliX-=4;if(movingRight)juliX+=4;
+const maxX=gameArea.clientWidth-55;if(juliX<5)juliX=5;if(juliX>maxX)juliX=maxX;
+velocityY-=.6;juliY+=velocityY;
+if(juliY<=0){juliY=0;velocityY=0;jumpAvailable=true;}
+updateJuli();handlePlatformCollision(previousY);checkHeartCollision();checkKeyCollision();checkDoorCollision();
+}
+requestAnimationFrame(gameLoop);
+}
+startLevel();requestAnimationFrame(gameLoop);
+</script>
+</body>
+</html>
