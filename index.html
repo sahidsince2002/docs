@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Juli's Escape Adventure ❤️</title>
+<title>Taniya's Escape Adventure ❤️</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%}
@@ -20,7 +20,7 @@ body{font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(135d
 .door{position:absolute;right:5%;bottom:90px;width:85px;height:145px;background:#875536;border:8px solid #673e29;border-radius:8px 8px 0 0;z-index:5}.door.locked:after{content:"🔒";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px}.door.open{background:#292929}.door.open:after{content:"🚪";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:30px}
 .table{position:absolute;left:35%;bottom:90px;width:170px;height:60px;background:#9c663e;border-radius:8px;z-index:3}.table:before,.table:after{content:"";position:absolute;width:17px;height:75px;background:#75472b;bottom:-60px}.table:before{left:18px}.table:after{right:18px}
 .chair{position:absolute;left:23%;bottom:90px;width:60px;height:75px;background:#e7a54c;border-radius:8px;z-index:3}
-.juli{position:absolute;width:48px;height:65px;z-index:20;will-change:left,bottom}.juli-body{position:absolute;left:8px;bottom:0;width:32px;height:38px;background:#ff78a5;border-radius:18px 18px 10px 10px}.juli-head{position:absolute;left:8px;top:0;width:32px;height:32px;background:#ffd2b3;border-radius:50%;z-index:2}.juli-head:before{content:"";position:absolute;top:-4px;left:-3px;width:38px;height:20px;background:#5a3425;border-radius:50% 50% 30% 30%}.eye{position:absolute;top:14px;width:4px;height:5px;background:#222;border-radius:50%;z-index:4}.eye.left{left:9px}.eye.right{right:9px}
+.taniya{position:absolute;width:48px;height:65px;z-index:20;will-change:left,bottom}.taniya-body{position:absolute;left:8px;bottom:0;width:32px;height:38px;background:#ff78a5;border-radius:18px 18px 10px 10px}.taniya-head{position:absolute;left:8px;top:0;width:32px;height:32px;background:#ffd2b3;border-radius:50%;z-index:2}.taniya-head:before{content:"";position:absolute;top:-4px;left:-3px;width:38px;height:20px;background:#5a3425;border-radius:50% 50% 30% 30%}.eye{position:absolute;top:14px;width:4px;height:5px;background:#222;border-radius:50%;z-index:4}.eye.left{left:9px}.eye.right{right:9px}
 .sahid{position:absolute;top:18px;left:18px;width:290px;display:flex;gap:10px;align-items:flex-start;z-index:50}.sahid-avatar{width:55px;height:55px;flex-shrink:0;border-radius:50%;background:#7f9cff;border:4px solid white;display:flex;justify-content:center;align-items:center;font-size:27px;box-shadow:0 3px 10px rgba(0,0,0,.2)}.speech{background:#fff;padding:11px 14px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,.15);font-size:14px;line-height:1.4}.speech strong{color:#ff5f8f}
 .heart{position:absolute;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:29px;z-index:12;pointer-events:none;animation:heartFloat 1s infinite alternate ease-in-out}@keyframes heartFloat{from{transform:translateY(0)}to{transform:translateY(-7px)}}
 .key{position:absolute;width:40px;height:40px;display:flex;justify-content:center;align-items:center;font-size:34px;z-index:12;pointer-events:none;animation:keyFloat 1s infinite alternate}@keyframes keyFloat{from{transform:rotate(-10deg) translateY(0)}to{transform:rotate(10deg) translateY(-6px)}}
@@ -33,28 +33,28 @@ body{font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(135d
 </head>
 <body>
 <div class="game-wrapper">
-<div class="header"><div class="logo">🌸 Juli's Escape Adventure</div><div class="stats"><div class="stat">Level: <span id="levelText">1</span>/5</div><div class="stat">❤️ <span id="heartCount">0</span></div></div></div>
+<div class="header"><div class="logo">🌸 Taniya's Escape Adventure</div><div class="stats"><div class="stat">Level: <span id="levelText">1</span>/5</div><div class="stat">❤️ <span id="heartCount">0</span></div></div></div>
 <div class="game-area" id="gameArea">
 <div class="room">
 <div class="wall-decoration"></div><div class="window"></div><div class="floor"></div>
 <div class="door locked" id="door"></div><div class="table"></div><div class="chair"></div>
 <div class="sahid"><div class="sahid-avatar">🧑</div><div class="speech"><strong>Sahid:</strong> <span id="hint"></span></div></div>
-<div class="juli" id="juli"><div class="juli-head"><span class="eye left"></span><span class="eye right"></span></div><div class="juli-body"></div></div>
+<div class="taniya" id="taniya"><div class="taniya-head"><span class="eye left"></span><span class="eye right"></span></div><div class="taniya-body"></div></div>
 <div class="level-complete" id="levelComplete"><div style="font-size:60px">🎉</div><h1>Level Complete!</h1><p id="praiseText"></p><button class="next-btn" id="nextBtn">Next Level ❤️</button></div>
-<div class="final-screen" id="finalScreen"><div class="final-heart">❤️</div><h1>You Did It, Juli!</h1><p>Juli, you were absolutely amazing! 🌸 You started this adventure trapped inside a room, but you never gave up.<br><br>You solved every challenge, collected every heart, found every key and made your way through all five levels.<br><br>Every challenge became easier because you kept trying, stayed patient and believed in yourself.<br><br>Sahid is really proud of you. ❤️<br><br>You proved that patience, courage and determination can help you overcome anything.<br><br>Keep being the clever, strong and wonderful person you are, Juli.<br><br>You didn't just escape the room — <strong>you conquered the whole adventure!</strong> 🌷✨</p><button class="next-btn" id="playAgainBtn">Play Again 🔄</button></div>
+<div class="final-screen" id="finalScreen"><div class="final-heart">❤️</div><h1>You Did It, Taniya!</h1><p>Taniya, you were absolutely amazing! 🌸 You started this adventure trapped inside a room, but you never gave up.<br><br>You solved every challenge, collected every heart, found every key and made your way through all five levels.<br><br>Every challenge became easier because you kept trying, stayed patient and believed in yourself.<br><br>Sahid is really proud of you. ❤️<br><br>You proved that patience, courage and determination can help you overcome anything.<br><br>Keep being the clever, strong and wonderful person you are, Taniya.<br><br>You didn't just escape the room — <strong>you conquered the whole adventure!</strong> 🌷✨</p><button class="next-btn" id="playAgainBtn">Play Again 🔄</button></div>
 </div></div>
 <div class="controls"><button class="control-btn" id="leftBtn">◀</button><button class="control-btn jump-btn" id="jumpBtn">▲</button><button class="control-btn" id="rightBtn">▶</button></div>
 </div>
 
 <script>
-const gameArea=document.getElementById("gameArea"),juli=document.getElementById("juli"),door=document.getElementById("door"),hint=document.getElementById("hint"),levelText=document.getElementById("levelText"),heartCountText=document.getElementById("heartCount"),levelComplete=document.getElementById("levelComplete"),praiseText=document.getElementById("praiseText"),nextBtn=document.getElementById("nextBtn"),finalScreen=document.getElementById("finalScreen"),playAgainBtn=document.getElementById("playAgainBtn");
-let level=1,hearts=0,keyCollected=false,gameRunning=true,levelFinished=false,juliX=60,juliY=0,velocityY=0,jumpAvailable=true,jumpPressed=false,movingLeft=false,movingRight=false,levelHearts=[],currentPlatforms=[];
+const gameArea=document.getElementById("gameArea"),taniya=document.getElementById("taniya"),door=document.getElementById("door"),hint=document.getElementById("hint"),levelText=document.getElementById("levelText"),heartCountText=document.getElementById("heartCount"),levelComplete=document.getElementById("levelComplete"),praiseText=document.getElementById("praiseText"),nextBtn=document.getElementById("nextBtn"),finalScreen=document.getElementById("finalScreen"),playAgainBtn=document.getElementById("playAgainBtn");
+let level=1,hearts=0,keyCollected=false,gameRunning=true,levelFinished=false,taniyaX=60,taniyaY=0,velocityY=0,jumpAvailable=true,jumpPressed=false,movingLeft=false,movingRight=false,levelHearts=[],currentPlatforms=[];
 const levels=[
-{hearts:3,platforms:[],hint:"Juli, start simple! ❤️ Collect all the hearts, find the key and reach the door!",praise:"Juli! 🌸 You did it! Your first escape is complete. You collected all the hearts and found your way out. I knew you could do it! ❤️"},
-{hearts:4,platforms:[{left:230,bottom:170,width:150},{left:470,bottom:230,width:150}],hint:"Level 2! 🌷 The hearts are a little higher now. Use your jump and collect all four!",praise:"Wow, Juli! 🎉 You completed Level 2! You handled the jumps perfectly and didn't give up. You're doing amazing! ❤️"},
-{hearts:5,platforms:[{left:170,bottom:150,width:130},{left:390,bottom:220,width:140},{left:620,bottom:160,width:130}],hint:"You're getting better! 🌼 Use the platforms to reach the hearts. I'm cheering for you, Juli!",praise:"Amazing, Juli! 🌼 Level 3 is complete! You are becoming a real escape expert. I love how patiently you solved that one! ✨"},
-{hearts:6,platforms:[{left:130,bottom:150,width:130},{left:320,bottom:240,width:130},{left:510,bottom:160,width:130},{left:700,bottom:250,width:110}],hint:"Level 4! 🌺 This one needs patience. Jump carefully and collect every heart!",praise:"Juli, that was fantastic! ❤️ You conquered Level 4! Even when things became harder, you kept trying. I'm really proud of you! 🌸"},
-{hearts:7,platforms:[{left:100,bottom:150,width:120},{left:270,bottom:230,width:120},{left:440,bottom:150,width:120},{left:610,bottom:240,width:120},{left:760,bottom:150,width:100}],hint:"This is the final room, Juli! ❤️ Collect every heart, find the key and escape! I believe in you!",praise:"YOU DID IT, JULI! 🎉❤️ Five levels completed! You were incredible. I knew you could make it all the way!"}
+{hearts:3,platforms:[],hint:"Taniya, start simple! ❤️ Collect all the hearts, find the key and reach the door!",praise:"Taniya! 🌸 You did it! Your first escape is complete. You collected all the hearts and found your way out. I knew you could do it! ❤️"},
+{hearts:4,platforms:[{left:230,bottom:170,width:150},{left:470,bottom:230,width:150}],hint:"Level 2! 🌷 The hearts are a little higher now. Use your jump and collect all four!",praise:"Wow, Taniya! 🎉 You completed Level 2! You handled the jumps perfectly and didn't give up. You're doing amazing! ❤️"},
+{hearts:5,platforms:[{left:170,bottom:150,width:130},{left:390,bottom:220,width:140},{left:620,bottom:160,width:130}],hint:"You're getting better! 🌼 Use the platforms to reach the hearts. I'm cheering for you, Taniya!",praise:"Amazing, Taniya! 🌼 Level 3 is complete! You are becoming a real escape expert. I love how patiently you solved that one! ✨"},
+{hearts:6,platforms:[{left:130,bottom:150,width:130},{left:320,bottom:240,width:130},{left:510,bottom:160,width:130},{left:700,bottom:250,width:110}],hint:"Level 4! 🌺 This one needs patience. Jump carefully and collect every heart!",praise:"Taniya, that was fantastic! ❤️ You conquered Level 4! Even when things became harder, you kept trying. I'm really proud of you! 🌸"},
+{hearts:7,platforms:[{left:100,bottom:150,width:120},{left:270,bottom:230,width:120},{left:440,bottom:150,width:120},{left:610,bottom:240,width:120},{left:760,bottom:150,width:100}],hint:"This is the final room, Taniya! ❤️ Collect every heart, find the key and escape! I believe in you!",praise:"YOU DID IT, TANIYA! 🎉❤️ Five levels completed! You were incredible. I knew you could make it all the way!"}
 ];
 function getHeartLocations(n){
 if(n===1)return[{left:170,bottom:125},{left:390,bottom:125},{left:610,bottom:125}];
@@ -64,34 +64,34 @@ if(n===4)return[{left:90,bottom:125},{left:165,bottom:195},{left:350,bottom:265}
 return[{left:70,bottom:125},{left:125,bottom:195},{left:310,bottom:255},{left:475,bottom:195},{left:650,bottom:265},{left:790,bottom:195},{left:850,bottom:125}];
 }
 function startLevel(){
-gameRunning=true;levelFinished=false;hearts=0;keyCollected=false;juliX=60;juliY=0;velocityY=0;jumpAvailable=true;jumpPressed=false;levelText.textContent=level;heartCountText.textContent=hearts;levelComplete.classList.remove("show");finalScreen.classList.remove("show");door.classList.remove("open");door.classList.add("locked");hint.textContent=levels[level-1].hint;document.querySelectorAll(".heart,.key,.platform").forEach(e=>e.remove());levelHearts=[];currentPlatforms=[];createLevelObjects();updateJuli();
+gameRunning=true;levelFinished=false;hearts=0;keyCollected=false;taniyaX=60;taniyaY=0;velocityY=0;jumpAvailable=true;jumpPressed=false;levelText.textContent=level;heartCountText.textContent=hearts;levelComplete.classList.remove("show");finalScreen.classList.remove("show");door.classList.remove("open");door.classList.add("locked");hint.textContent=levels[level-1].hint;document.querySelectorAll(".heart,.key,.platform").forEach(e=>e.remove());levelHearts=[];currentPlatforms=[];createLevelObjects();updateTaniya();
 }
 function createLevelObjects(){
 levels[level-1].platforms.forEach(p=>{const el=document.createElement("div");el.className="platform";el.style.left=p.left+"px";el.style.bottom=p.bottom+"px";el.style.width=p.width+"px";gameArea.appendChild(el);currentPlatforms.push({element:el,left:p.left,bottom:p.bottom,width:p.width});});
 getHeartLocations(level).forEach(p=>{const el=document.createElement("div");el.className="heart";el.textContent="❤️";el.style.left=p.left+"px";el.style.bottom=p.bottom+"px";gameArea.appendChild(el);levelHearts.push(el);});
 const key=document.createElement("div");key.className="key";key.id="levelKey";key.textContent="🔑";key.style.left="620px";key.style.bottom="210px";key.style.display="none";gameArea.appendChild(key);
 }
-function updateJuli(){juli.style.left=juliX+"px";juli.style.bottom=(90+juliY)+"px";}
+function updateTaniya(){taniya.style.left=taniyaX+"px";taniya.style.bottom=(90+taniyaY)+"px";}
 function jump(){if(!gameRunning||jumpPressed||!jumpAvailable)return;jumpPressed=true;jumpAvailable=false;velocityY=14;}
 function handlePlatformCollision(previousY){
 if(velocityY>=0)return;
-const playerLeft=juliX,playerRight=juliX+48,previousFeet=90+previousY,currentFeet=90+juliY;
+const playerLeft=taniyaX,playerRight=taniyaX+48,previousFeet=90+previousY,currentFeet=90+taniyaY;
 for(const p of currentPlatforms){
 const horizontal=playerRight>p.left&&playerLeft<p.left+p.width;if(!horizontal)continue;
 const platformTop=p.bottom+18;
-if(previousFeet>=platformTop&&currentFeet<=platformTop){juliY=platformTop-90;velocityY=0;jumpAvailable=true;updateJuli();return;}
+if(previousFeet>=platformTop&&currentFeet<=platformTop){taniyaY=platformTop-90;velocityY=0;jumpAvailable=true;updateTaniya();return;}
 }
 }
 function checkHeartCollision(){
-const r=juli.getBoundingClientRect();
+const r=taniya.getBoundingClientRect();
 for(let i=0;i<levelHearts.length;i++){const h=levelHearts[i];if(!h||!h.isConnected)continue;const hr=h.getBoundingClientRect();if(!(r.right<hr.left||r.left>hr.right||r.bottom<hr.top||r.top>hr.bottom)){h.remove();levelHearts[i]=null;hearts++;heartCountText.textContent=hearts;if(hearts>=levels[level-1].hearts)showKey();}}
 }
 function showKey(){const key=document.getElementById("levelKey");if(!key)return;key.style.display="flex";hint.textContent="Amazing! 🌸 You collected every heart! Now find the key and escape! 🔑";}
 function checkKeyCollision(){
-if(keyCollected)return;const key=document.getElementById("levelKey");if(!key||key.style.display==="none")return;const r=juli.getBoundingClientRect(),kr=key.getBoundingClientRect();if(!(r.right<kr.left||r.left>kr.right||r.bottom<kr.top||r.top>kr.bottom)){keyCollected=true;key.remove();door.classList.remove("locked");door.classList.add("open");hint.textContent="You found the key! 🔑 Now reach the door, Juli! ❤️";}
+if(keyCollected)return;const key=document.getElementById("levelKey");if(!key||key.style.display==="none")return;const r=taniya.getBoundingClientRect(),kr=key.getBoundingClientRect();if(!(r.right<kr.left||r.left>kr.right||r.bottom<kr.top||r.top>kr.bottom)){keyCollected=true;key.remove();door.classList.remove("locked");door.classList.add("open");hint.textContent="You found the key! 🔑 Now reach the door, Taniya! ❤️";}
 }
 function checkDoorCollision(){
-if(!keyCollected||levelFinished)return;const r=juli.getBoundingClientRect(),dr=door.getBoundingClientRect();if(!(r.right<dr.left||r.left>dr.right||r.bottom<dr.top||r.top>dr.bottom))completeLevel();
+if(!keyCollected||levelFinished)return;const r=taniya.getBoundingClientRect(),dr=door.getBoundingClientRect();if(!(r.right<dr.left||r.left>dr.right||r.bottom<dr.top||r.top>dr.bottom))completeLevel();
 }
 function completeLevel(){if(levelFinished)return;levelFinished=true;gameRunning=false;praiseText.textContent=levels[level-1].praise;levelComplete.classList.add("show");nextBtn.textContent=level===5?"Finish Adventure ❤️":"Next Level ❤️";}
 nextBtn.addEventListener("click",()=>{if(level===5){levelComplete.classList.remove("show");finalScreen.classList.add("show");gameRunning=false;return;}level++;startLevel();});
@@ -114,12 +114,12 @@ jumpBtn.addEventListener("pointerup",e=>{e.preventDefault();jumpPressed=false;})
 jumpBtn.addEventListener("pointercancel",()=>{jumpPressed=false;});
 function gameLoop(){
 if(gameRunning){
-const previousY=juliY;
-if(movingLeft)juliX-=4;if(movingRight)juliX+=4;
-const maxX=gameArea.clientWidth-55;if(juliX<5)juliX=5;if(juliX>maxX)juliX=maxX;
-velocityY-=.6;juliY+=velocityY;
-if(juliY<=0){juliY=0;velocityY=0;jumpAvailable=true;}
-updateJuli();handlePlatformCollision(previousY);checkHeartCollision();checkKeyCollision();checkDoorCollision();
+const previousY=taniyaY;
+if(movingLeft)taniyaX-=4;if(movingRight)taniyaX+=4;
+const maxX=gameArea.clientWidth-55;if(taniyaX<5)taniyaX=5;if(taniyaX>maxX)taniyaX=maxX;
+velocityY-=.6;taniyaY+=velocityY;
+if(taniyaY<=0){taniyaY=0;velocityY=0;jumpAvailable=true;}
+updateTaniya();handlePlatformCollision(previousY);checkHeartCollision();checkKeyCollision();checkDoorCollision();
 }
 requestAnimationFrame(gameLoop);
 }
